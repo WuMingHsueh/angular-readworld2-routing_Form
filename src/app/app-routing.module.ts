@@ -5,6 +5,7 @@ import { PostsComponent } from './posts/posts/posts.component';
 import { PostComponent } from './posts/post/post.component';
 import { EditorComponent } from './posts/editor/editor.component';
 import { AuthComponent } from './login/auth/auth.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path: 'create', component: EditorComponent },
     ]
   },
-  { path: 'login', component: AuthComponent }
+  { path: 'login', component: AuthComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

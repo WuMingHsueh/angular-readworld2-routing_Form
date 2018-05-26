@@ -14,7 +14,7 @@ import { MainComponent } from './main/main.component';
     PostsModule,
     AppRoutingModule
   ],
-  exports: [MainComponent],
+  exports: [MainComponent, NavComponent, FooterComponent],
   declarations: [NavComponent, FooterComponent, MainComponent]
 })
 export class LayoutModule { }
