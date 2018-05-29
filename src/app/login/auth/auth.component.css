@@ -1,0 +1,7 @@
+input.ng-invalid.ng-dirty {
+  color: #B85C5C;
+}
+
+.has-danger {
+  background-color: #B85C5C;
+}

@@ -5,14 +5,30 @@
       <div class="col-md-6 col-md-offset-3 col-xs-12">
         <h1 class="text-xs-center">Sign in</h1>
 
-        <form>
+        <form #tform="ngForm">
           <fieldset class="form-group">
-            <input name="email" class="form-control form-control-lg" type="text" placeholder="Email">
+            <input name="email" class="form-control form-control-lg" type="text" placeholder="Email" [(ngModel)]="loginData.email" #tloginEmail="ngModel"
+              required email> {{ tloginEmail.value }}
+            <span class="has-danger" *ngIf="tloginEmail.invalid && tloginEmail.dirty && tloginEmail['errors']['required']">
+              email 欄位不可為空
+            </span>
+            <span class="has-danger" *ngIf="tloginEmail.invalid && tloginEmail.dirty && tloginEmail['errors']['email']">
+              必須為email格式
+            </span>
+
           </fieldset>
           <fieldset class="form-group">
-            <input name="password" class="form-control form-control-lg" type="password" placeholder="Password">
+            <input name="password" class="form-control form-control-lg" type="password" placeholder="Password" [(ngModel)]="loginData.password"
+              #tloginPassword="ngModel" required minlength="4">
+            <span class="has-danger" *ngIf="tloginPassword.invalid && tloginPassword.dirty && tloginPassword['errors']['required']">
+              password 欄位不可為空
+            </span>
+            <span class="has-danger" *ngIf="tloginPassword.invalid && tloginPassword.dirty && tloginPassword['errors']['minlength']">
+              密碼須大於 4
+            </span>
+
           </fieldset>
-          <button type="button" class="btn btn-lg btn-primary pull-xs-right" (click)="loginGoHome()">
+          <button type="button" class="btn btn-lg btn-primary pull-xs-right" (click)="loginGoHome()" [disabled]="tform.invalid">
             Sign in
           </button>
         </form>

@@ -3,25 +3,29 @@
     <div class="row">
 
       <div class="col-md-10 col-md-offset-1 col-xs-12">
-        <form>
+        <form [formGroup]="createPostForm">
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="Post Title">
-          </fieldset>
-          <fieldset class="form-group">
-            <textarea class="form-control" rows="8" placeholder="Write your post (in markdown)"></textarea>
-          </fieldset>
-          <fieldset class="form-group">
-            <input class="form-control" type="text" placeholder="Enter tags">
-            <div class="tag-list">
-              <span class="label label-pill label-default">
-                <i class="ion-close-round"></i> programming</span>
-              <span class="label label-pill label-default">
-                <i class="ion-close-round"></i> javascript</span>
-              <span class="label label-pill label-default">
-                <i class="ion-close-round"></i> webdev</span>
+            <input class="form-control form-control-lg" type="text" placeholder="Post Title" formControlName="title">
+            <div *ngIf="title.invalid && title.dirty">
+              <span *ngIf="title['errors']['required']">請輸入標題</span>
             </div>
           </fieldset>
-          <button type="button" class="btn btn-lg btn-primary pull-xs-right">
+          <fieldset class="form-group">
+            <textarea class="form-control" rows="8" placeholder="Write your post (in markdown)" formControlName="content"></textarea>
+            <div *ngIf="content.invalid && content.dirty">
+              <span *ngIf="content['errors']['required']">請輸入內文</span>
+              <span *ngIf="content['errors']['minlength']">內文要超過10字</span>
+            </div>
+          </fieldset>
+          <fieldset class="form-group">
+            <input class="form-control" type="text" placeholder="Enter tags" FormArrayName="tags" #tTag (keyup.enter)="addTag($event.target.value); tTag.value=''">
+            <div class="tag-list">
+              <span class="label label-pill label-default" *ngFor="let tag of tags.controls ; let idx = index">
+                <i class="ion-close-round" (click)="deleteTag(idx)"></i>{{ tag.value }}
+              </span>
+            </div>
+          </fieldset>
+          <button type="button" class="btn btn-lg btn-primary pull-xs-right" [disabled]="createPostForm.invalid" (click)="createPost()">
             Create Post
           </button>
         </form>

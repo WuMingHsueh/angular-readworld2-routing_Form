@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { PostsComponent } from './posts/posts.component';
 import { PostComponent } from './post/post.component';
 import { EditorComponent } from './editor/editor.component';
@@ -10,7 +12,8 @@ import { MainComponent } from '../layout/main/main.component';
 @NgModule({
   imports: [
     CommonModule,
-    PostsRoutingModule
+    PostsRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [PostsComponent, PostComponent, EditorComponent]
 })
